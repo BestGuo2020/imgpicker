@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="免费在线智能图片裁剪工具，支持批量处理、自动识别素材区域、手动裁剪，支持PNG、JPG等多种格式，无需安装，保护隐私。">
+    <meta name="keywords" content="智能图片裁剪,在线图片裁剪,批量裁剪,图片素材处理,免费图片裁剪工具">
+    <title>智能图片裁剪工具 - 免费在线批量裁剪图片素材</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>">
+    
+    <!-- 社交媒体元标签 -->
+    <meta property="og:title" content="智能图片裁剪工具 - 免费在线批量裁剪图片素材">
+    <meta property="og:description" content="免费在线智能图片裁剪工具，支持批量处理、自动识别素材区域、手动裁剪，支持PNG、JPG等多种格式，无需安装，保护隐私。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://imgclip.bestguo.top">
+    <meta property="og:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'><rect width='1200' height='630' fill='%23f5f5f5'/><text x='600' y='350' font-size='120' text-anchor='middle' fill='%23409eff'>✂️</text><text x='600' y='450' font-size='60' text-anchor='middle' fill='%23333'>智能图片裁剪工具</text></svg>">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="智能图片裁剪工具 - 免费在线批量裁剪图片素材">
+    <meta name="twitter:description" content="免费在线智能图片裁剪工具，支持批量处理、自动识别素材区域、手动裁剪，支持PNG、JPG等多种格式，无需安装，保护隐私。">
+    <meta name="twitter:image" content="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'><rect width='1200' height='630' fill='%23f5f5f5'/><text x='600' y='350' font-size='120' text-anchor='middle' fill='%23409eff'>✂️</text><text x='600' y='450' font-size='60' text-anchor='middle' fill='%23333'>智能图片裁剪工具</text></svg>">
+    
+    <!-- 多语言SEO标签 -->
+    <link rel="alternate" hreflang="zh-CN" href="https://imgclip.bestguo.top/zh">
+    <link rel="alternate" hreflang="en" href="https://imgclip.bestguo.top/en">
+    <link rel="alternate" hreflang="ja" href="https://imgclip.bestguo.top/ja">
+    <link rel="alternate" hreflang="ko" href="https://imgclip.bestguo.top/ko">
+    <link rel="alternate" hreflang="x-default" href="https://imgclip.bestguo.top/zh">
+    
+    <!-- Canonical标签 -->
+    <link rel="canonical" href="https://imgclip.bestguo.top">
+    
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "智能图片裁剪工具",
+      "url": "https://imgclip.bestguo.top",
+      "description": "免费在线智能图片裁剪工具，支持批量处理、自动识别素材区域、手动裁剪"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Tool",
+      "name": "智能图片裁剪工具",
+      "description": "免费在线智能图片裁剪工具，支持批量处理、自动识别素材区域、手动裁剪，支持PNG、JPG等多种格式，无需安装，保护隐私。",
+      "url": "https://imgclip.bestguo.top",
+      "image": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>",
+      "author": {
+        "@type": "Person",
+        "name": "BestGuo2020"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "BestGuo2020"
+      },
+      "dateCreated": "2025-01-01",
+      "dateModified": "2025-12-01",
+      "softwareVersion": "1.0.0",
+      "operatingSystem": "All",
+      "applicationCategory": "ImageEditing",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "CNY"
+      },
+      "featureList": [
+        "智能识别图片中的各个素材并自动裁剪",
+        "支持手动选框自由裁剪",
+        "批量处理，一次裁剪多个素材",
+        "支持PNG、JPG等多种图片格式",
+        "单个下载和打包下载功能",
+        "无需安装，在线使用，保护隐私"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "100"
+      }
+    }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #409eff;
+            text-decoration: none;
+        }
+        
+        .navbar-menu {
+            display: flex;
+            list-style: none;
+        }
+        
+        .navbar-menu li {
+            margin-left: 20px;
+        }
+        
+        .navbar-menu a {
+            text-decoration: none;
+            color: #666;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar-menu a:hover {
+            color: #409eff;
+        }
+        
+        /* 主要内容样式 */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 标题样式 */
+        .page-title {
+            text-align: center;
+            margin: 30px 0 10px;
+            color: #333;
+            font-size: 28px;
+        }
+        
+        .page-subtitle {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #666;
+            font-size: 16px;
+        }
+        
+        /* 说明部分样式 */
+        .description-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .description-section h2 {
+            margin-bottom: 20px;
+            color: #409eff;
+            font-size: 20px;
+        }
+        
+        .description-section p {
+            margin-bottom: 15px;
+            color: #666;
+        }
+        
+        .features-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .features-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+            color: #666;
+        }
+        
+        .features-list li::before {
+            content: "✓";
+            color: #67c23a;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* 操作说明样式 */
+        .instructions-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .instructions-section h2 {
+            margin-bottom: 20px;
+            color: #409eff;
+            font-size: 20px;
+        }
+        
+        .instructions-list {
+            list-style: none;
+            counter-reset: step;
+        }
+        
+        .instructions-list li {
+            margin-bottom: 15px;
+            padding-left: 35px;
+            position: relative;
+            color: #666;
+        }
+        
+        .instructions-list li::before {
+            content: counter(step);
+            counter-increment: step;
+            background-color: #409eff;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        /* 裁剪区域样式 */
+        .crop-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .upload-area {
+            border: 2px dashed #ddd;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+        
+        .upload-area:hover {
+            border-color: #409eff;
+            background-color: #f0f9ff;
+        }
+        
+        .upload-area input[type="file"] {
+            display: none;
+        }
+        
+        .upload-text {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #409eff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #66b1ff;
+        }
+        
+        .btn:disabled {
+            background-color: #c0c4cc;
+            cursor: not-allowed;
+        }
+        
+        .image-preview {
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        #image {
+            max-width: 100%;
+            max-height: 500px;
+            display: none;
+        }
+        
+        .cropper-container {
+            margin: 20px auto;
+            max-width: 100%;
+        }
+        
+        /* 结果区域样式 */
+        .results-section {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .results-section h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 20px;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .result-item {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .result-item:hover {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-item img {
+            max-width: 100%;
+            max-height: 150px;
+            margin-bottom: 10px;
+        }
+        
+        .result-item .btn {
+            margin: 5px;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+        
+        .download-all {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        /* 加载状态样式 */
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            color: #409eff;
+        }
+        
+        .loading::after {
+            content: "";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid #409eff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* 页脚样式 */
+        footer {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 多语言支持样式 */
+        .language-selector {
+            margin: 15px 0;
+        }
+        
+        .language-selector select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+            color: #666;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .language-selector select:hover {
+            border-color: #409eff;
+        }
+        
+        /* 常见问题样式 */
+        .faq-item {
+            margin-bottom: 20px;
+        }
+        
+        .faq-item h3 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .faq-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* 广告容器样式 */
+        .ad-container {
+            text-align: center;
+            margin: 20px 0;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar-container {
+                flex-direction: column;
+            }
+            
+            .navbar-menu {
+                margin-top: 15px;
+            }
+            
+            .navbar-menu li {
+                margin: 0 10px;
+            }
+            
+            .results-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .ad-container {
+                margin: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo">智能图片裁剪工具</a>
+            <ul class="navbar-menu">
+                <li><a href="#">首页</a></li>
+                <li><a href="#features">功能</a></li>
+                <li><a href="#instructions">使用说明</a></li>
+                <li><a href="#faq">常见问题</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- 主要内容 -->
+    <div class="container">
+        <h1 class="page-title">智能图片裁剪工具 - 免费在线批量裁剪图片素材</h1>
+        <p class="page-subtitle">免费在线智能图片裁剪，支持批量处理和多种格式导出</p>
+        
+        <!-- 广告区域 -->
+        <div class="ad-container">
+            <script async="async" data-cfasync="false" src="//pl28165210.effectivegatecpm.com/0be69815209f75a7abfa6235a81b6783/invoke.js"></script>
+            <div id="container-0be69815209f75a7abfa6235a81b6783"></div>
+        </div>
+        
+        <!-- 网站说明 -->
+        <section class="description-section" id="features">
+            <h2>功能特点</h2>
+            <p>智能图片裁剪工具是一款免费在线工具，专为前端开发者、设计师和内容创作者打造，帮助您快速高效地处理图片素材。</p>
+            <ul class="features-list">
+                <li>智能识别图片中的各个素材并自动裁剪</li>
+                <li>支持手动选框自由裁剪</li>
+                <li>批量处理，一次裁剪多个素材</li>
+                <li>支持PNG、JPG等多种图片格式</li>
+                <li>单个下载和打包下载功能</li>
+                <li>无需安装，在线使用，保护隐私</li>
+            </ul>
+        </section>
+        
+        <!-- 操作说明 -->
+        <section class="instructions-section" id="instructions">
+            <h2>使用说明</h2>
+            <ul class="instructions-list">
+                <li>点击或拖拽图片到上传区域，支持PNG、JPG等格式</li>
+                <li>选择裁剪方式：智能裁剪或手动裁剪</li>
+                <li>智能裁剪：系统自动识别图片中的各个素材并裁剪</li>
+                <li>手动裁剪：使用鼠标在图片上绘制裁剪区域，然后点击"手动裁剪"按钮</li>
+                <li>查看裁剪结果，可选择单个下载或打包下载所有素材</li>
+            </ul>
+        </section>
+        
+        <!-- 裁剪区域 -->
+        <section class="crop-section">
+            <div class="upload-area" id="uploadArea">
+                <input type="file" id="fileInput" accept="image/*">
+                <div class="upload-text">点击或拖拽图片到此处上传</div>
+            </div>
+            <div style="text-align: center; margin-top: 10px;">
+                <button class="btn" id="cropBtn" disabled>智能裁剪</button>
+                <button class="btn" id="manualCropBtn" disabled>手动裁剪</button>
+                <button class="btn" id="resetBtn" disabled>重置</button>
+            </div>
+            
+            <div class="image-preview">
+                <img id="image" alt="上传的图片 - 智能图片裁剪工具">
+                <div class="loading" id="loading">正在智能裁剪</div>
+            </div>
+        </section>
+        
+        <!-- 结果区域 -->
+        <section class="results-section">
+            <h2>裁剪结果</h2>
+            <div class="results-grid" id="resultsGrid"></div>
+            <div class="download-all">
+                <button class="btn" id="downloadAllBtn" disabled>打包下载所有</button>
+            </div>
+        </section>
+        
+        <!-- 常见问题 -->
+        <section class="description-section" id="faq">
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>这款图片裁剪工具是否免费？</h3>
+                <p>是的，智能图片裁剪工具是完全免费的在线工具，没有使用次数限制，也不需要注册账号。</p>
+            </div>
+            <div class="faq-item">
+                <h3>支持哪些图片格式？</h3>
+                <p>支持上传 JPG、PNG、WebP 格式的图片，导出格式为 PNG。</p>
+            </div>
+            <div class="faq-item">
+                <h3>图片会被上传到服务器吗？</h3>
+                <p>不会，所有图片处理都在本地浏览器中完成，您的图片不会被上传到任何服务器，保护您的隐私安全。</p>
+            </div>
+            <div class="faq-item">
+                <h3>为什么裁剪结果不理想？</h3>
+                <p>如果智能裁剪结果不理想，您可以尝试使用手动裁剪功能，手动调整裁剪区域。同时，确保图片背景色与素材颜色有明显区别。</p>
+            </div>
+        </section>
+    </div>
+    
+    <!-- 广告区域 -->
+    <div class="ad-container">
+        <script type="text/javascript"> 
+            atOptions = { 
+                'key' : '6fc181d1de661d959f91f823124567ed', 
+                'format' : 'iframe', 
+                'height' : 90, 
+                'width' : 728, 
+                'params' : {} 
+            }; 
+        </script> 
+        <script type="text/javascript" src="//www.highperformanceformat.com/6fc181d1de661d959f91f823124567ed/invoke.js"></script>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <!-- 多语言支持 -->
+            <div class="language-selector">
+                <label for="language">选择语言：</label>
+                <select id="language" onchange="changeLanguage()">
+                    <option value="zh-CN" selected>简体中文</option>
+                    <option value="en">English</option>
+                    <option value="ja">日本語</option>
+                    <option value="ko">한국어</option>
+                </select>
+            </div>
+            <p>&copy; 2025 智能图片裁剪工具. 保留所有权利.</p>
+        </div>
+    </footer>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script>
+        // 多语言支持
+        const i18n = {
+            'zh-CN': {
+                'nav.home': '首页',
+                'nav.features': '功能',
+                'nav.instructions': '使用说明',
+                'nav.faq': '常见问题',
+                'title': '智能图片裁剪工具',
+                'subtitle': '免费在线智能图片裁剪，支持批量处理和多种格式导出',
+                'features.title': '功能特点',
+                'features.desc': '智能图片裁剪工具是一款免费在线工具，专为前端开发者、设计师和内容创作者打造，帮助您快速高效地处理图片素材。',
+                'features.item1': '智能识别图片中的各个素材并自动裁剪',
+                'features.item2': '支持手动选框自由裁剪',
+                'features.item3': '批量处理，一次裁剪多个素材',
+                'features.item4': '支持PNG、JPG等多种图片格式',
+                'features.item5': '单个下载和打包下载功能',
+                'features.item6': '无需安装，在线使用，保护隐私',
+                'instructions.title': '使用说明',
+                'instructions.item1': '点击或拖拽图片到上传区域，支持PNG、JPG等格式',
+                'instructions.item2': '选择裁剪方式：智能裁剪或手动裁剪',
+                'instructions.item3': '智能裁剪：系统自动识别图片中的各个素材并裁剪',
+                'instructions.item4': '手动裁剪：使用鼠标在图片上绘制裁剪区域，然后点击"手动裁剪"按钮',
+                'instructions.item5': '查看裁剪结果，可选择单个下载或打包下载所有素材',
+                'upload.text': '点击或拖拽图片到此处上传',
+                'btn.smartCrop': '智能裁剪',
+                'btn.manualCrop': '手动裁剪',
+                'btn.reset': '重置',
+                'btn.downloadAll': '打包下载所有',
+                'loading': '正在智能裁剪',
+                'results.title': '裁剪结果',
+                'result.size': '尺寸:',
+                'btn.download': '下载',
+                'btn.delete': '删除',
+                'language.select': '选择语言：',
+                'copyright': '© 2025 智能图片裁剪工具. 保留所有权利.',
+                'faq.title': '常见问题',
+                'faq.q1': '这款图片裁剪工具是否免费？',
+                'faq.a1': '是的，智能图片裁剪工具是完全免费的在线工具，没有使用次数限制，也不需要注册账号。',
+                'faq.q2': '支持哪些图片格式？',
+                'faq.a2': '支持上传 JPG、PNG、WebP 格式的图片，导出格式为 PNG。',
+                'faq.q3': '图片会被上传到服务器吗？',
+                'faq.a3': '不会，所有图片处理都在本地浏览器中完成，您的图片不会被上传到任何服务器，保护您的隐私安全。',
+                'faq.q4': '为什么裁剪结果不理想？',
+                'faq.a4': '如果智能裁剪结果不理想，您可以尝试使用手动裁剪功能，手动调整裁剪区域。同时，确保图片背景色与素材颜色有明显区别。',
+                'alert.image': '请上传图片文件！'
+            },
+            'en': {
+                'nav.home': 'Home',
+                'nav.features': 'Features',
+                'nav.instructions': 'Instructions',
+                'nav.faq': 'FAQ',
+                'title': 'Smart Image Cropper',
+                'subtitle': 'Free online smart image cropping tool, supporting batch processing and multiple format exports',
+                'features.title': 'Features',
+                'features.desc': 'Smart Image Cropper is a free online tool designed for front-end developers, designers and content creators to help you process image materials quickly and efficiently.',
+                'features.item1': 'Intelligently identify and automatically crop each material in the image',
+                'features.item2': 'Support manual selection for free cropping',
+                'features.item3': 'Batch processing, crop multiple materials at once',
+                'features.item4': 'Support multiple image formats like PNG, JPG',
+                'features.item5': 'Single download and batch download functions',
+                'features.item6': 'No installation required, use online, protect privacy',
+                'instructions.title': 'How to Use',
+                'instructions.item1': 'Click or drag images to the upload area, supporting PNG, JPG and other formats',
+                'instructions.item2': 'Select cropping method: Smart Crop or Manual Crop',
+                'instructions.item3': 'Smart Crop: Automatically identify and crop each material in the image',
+                'instructions.item4': 'Manual Crop: Draw a cropping area on the image with your mouse, then click the "Manual Crop" button',
+                'instructions.item5': 'View the cropping results, you can choose to download individually or download all materials in a package',
+                'upload.text': 'Click or drag images to upload',
+                'btn.smartCrop': 'Smart Crop',
+                'btn.manualCrop': 'Manual Crop',
+                'btn.reset': 'Reset',
+                'btn.downloadAll': 'Download All',
+                'loading': 'Smart cropping in progress',
+                'results.title': 'Cropping Results',
+                'result.size': 'Size:',
+                'btn.download': 'Download',
+                'btn.delete': 'Delete',
+                'language.select': 'Select Language:',
+                'copyright': '© 2025 Smart Image Cropper. All rights reserved.',
+                'faq.title': 'Frequently Asked Questions',
+                'faq.q1': 'Is this image cropping tool free?',
+                'faq.a1': 'Yes, Smart Image Cropper is a completely free online tool with no usage limits and no account registration required.',
+                'faq.q2': 'What image formats are supported?',
+                'faq.a2': 'Supports uploading JPG, PNG, WebP format images, and exports in PNG format.',
+                'faq.q3': 'Will images be uploaded to the server?',
+                'faq.a3': 'No, all image processing is done in the local browser. Your images will not be uploaded to any server, protecting your privacy and security.',
+                'faq.q4': 'Why are the cropping results not ideal?',
+                'faq.a4': 'If the smart cropping results are not ideal, you can try using the manual cropping function to adjust the cropping area manually. Also, make sure there is a clear distinction between the image background color and the material color.',
+                'alert.image': 'Please upload an image file!'
+            },
+            'ja': {
+                'nav.home': 'ホーム',
+                'nav.features': '機能',
+                'nav.instructions': '使い方',
+                'nav.faq': 'よくある質問',
+                'title': 'スマート画像クロッピングツール',
+                'subtitle': '無料オンラインスマート画像クロッピング、バッチ処理と複数形式のエクスポートをサポート',
+                'features.title': '機能特徴',
+                'features.desc': 'スマート画像クロッピングツールは、フロントエンド開発者、デザイナー、コンテンツクリエーター向けの無料オンラインツールで、画像素材を迅速かつ効率的に処理するのに役立ちます。',
+                'features.item1': '画像内の各素材をスマートに識別し、自動的にクロッピング',
+                'features.item2': '手動で選択して自由にクロッピング',
+                'features.item3': 'バッチ処理、一度に複数の素材をクロッピング',
+                'features.item4': 'PNG、JPGなど複数の画像形式をサポート',
+                'features.item5': '単独ダウンロードと一括ダウンロード機能',
+                'features.item6': 'インストール不要、オンラインで使用、プライバシー保護',
+                'instructions.title': '使い方',
+                'instructions.item1': '画像をクリックまたはドラッグしてアップロードエリアに追加します。PNG、JPGなどの形式をサポートしています。',
+                'instructions.item2': 'クロッピング方法を選択：スマートクロッピングまたは手動クロッピング',
+                'instructions.item3': 'スマートクロッピング：システムが画像内の各素材を自動的に識別してクロッピング',
+                'instructions.item4': '手動クロッピング：マウスで画像上にクロッピングエリアを描画し、「手動クロッピング」ボタンをクリックします。',
+                'instructions.item5': 'クロッピング結果を表示し、単独ダウンロードまたはすべての素材を一括ダウンロードできます。',
+                'upload.text': 'ここに画像をクリックまたはドラッグしてアップロード',
+                'btn.smartCrop': 'スマートクロッピング',
+                'btn.manualCrop': '手動クロッピング',
+                'btn.reset': 'リセット',
+                'btn.downloadAll': 'すべてダウンロード',
+                'loading': 'スマートクロッピング中',
+                'results.title': 'クロッピング結果',
+                'result.size': 'サイズ:',
+                'btn.download': 'ダウンロード',
+                'btn.delete': '削除',
+                'language.select': '言語を選択:',
+                'copyright': '© 2025 スマート画像クロッピングツール. 全著作権所有.',
+                'faq.title': 'よくある質問',
+                'faq.q1': 'この画像クロッピングツールは無料ですか？',
+                'faq.a1': 'はい、スマート画像クロッピングツールは完全に無料のオンラインツールで、使用回数の制限も、アカウント登録も必要ありません。',
+                'faq.q2': 'どのような画像形式をサポートしていますか？',
+                'faq.a2': 'JPG、PNG、WebP形式の画像のアップロードをサポートし、PNG形式でエクスポートします。',
+                'faq.q3': '画像はサーバーにアップロードされますか？',
+                'faq.a3': 'いいえ、すべての画像処理はローカルブラウザで行われます。あなたの画像はどのサーバーにもアップロードされず、プライバシーとセキュリティが保護されます。',
+                'faq.q4': 'クロッピング結果が理想的でないのはなぜですか？',
+                'faq.a4': 'スマートクロッピングの結果が理想的でない場合は、手動クロッピング機能を使用して、クロッピングエリアを手動で調整できます。また、画像の背景色と素材色に明確な区別があることを確認してください。',
+                'alert.image': '画像ファイルをアップロードしてください！'
+            },
+            'ko': {
+                'nav.home': '홈',
+                'nav.features': '기능',
+                'nav.instructions': '사용 방법',
+                'nav.faq': '자주 묻는 질문',
+                'title': '스마트 이미지 자르기 도구',
+                'subtitle': '무료 온라인 스마트 이미지 자르기, 일괄 처리 및 여러 형식 내보내기 지원',
+                'features.title': '기능 특징',
+                'features.desc': '스마트 이미지 자르기 도구는 프론트엔드 개발자, 디자이너 및 콘텐츠 크리에이터를 위한 무료 온라인 도구로, 이미지 자료를 빠르고 효율적으로 처리하도록 도와줍니다.',
+                'features.item1': '이미지의 각 소재를 스마트하게 식별하고 자동으로 자릅니다.',
+                'features.item2': '수동으로 선택하여 자유롭게 자를 수 있습니다.',
+                'features.item3': '일괄 처리, 한 번에 여러 소재를 자릅니다.',
+                'features.item4': 'PNG, JPG 등 다양한 이미지 형식을 지원합니다.',
+                'features.item5': '개별 다운로드 및 일괄 다운로드 기능',
+                'features.item6': '설치가 필요 없고, 온라인으로 사용하며, 개인 정보를 보호합니다.',
+                'instructions.title': '사용 방법',
+                'instructions.item1': 'PNG, JPG 등의 형식을 지원하는 업로드 영역에 이미지를 클릭하거나 드래그하세요.',
+                'instructions.item2': '자르기 방법 선택: 스마트 자르기 또는 수동 자르기',
+                'instructions.item3': '스마트 자르기: 시스템이 이미지의 각 소재를 자동으로 식별하고 자릅니다.',
+                'instructions.item4': '수동 자르기: 마우스로 이미지에 자르기 영역을 그린 다음 "수동 자르기" 버튼을 클릭하세요.',
+                'instructions.item5': '자르기 결과를 보고 개별 다운로드하거나 모든 소재를 일괄 다운로드할 수 있습니다.',
+                'upload.text': '여기에 이미지를 클릭하거나 드래그하여 업로드하세요',
+                'btn.smartCrop': '스마트 자르기',
+                'btn.manualCrop': '수동 자르기',
+                'btn.reset': '초기화',
+                'btn.downloadAll': '전체 다운로드',
+                'loading': '스마트 자르기 중',
+                'results.title': '자르기 결과',
+                'result.size': '크기:',
+                'btn.download': '다운로드',
+                'btn.delete': '삭제',
+                'language.select': '언어 선택:',
+                'copyright': '© 2025 스마트 이미지 자르기 도구. 모든 권리 보유.',
+                'faq.title': '자주 묻는 질문',
+                'faq.q1': '이 이미지 자르기 도구는 무료인가요?',
+                'faq.a1': '예, 스마트 이미지 자르기 도구는 사용 횟수 제한 없이 완전히 무료인 온라인 도구이며, 계정 등록도 필요하지 않습니다.',
+                'faq.q2': '어떤 이미지 형식을 지원하나요?',
+                'faq.a2': 'JPG, PNG, WebP 형식의 이미지 업로드를 지원하며, PNG 형식으로 내보냅니다.',
+                'faq.q3': '이미지가 서버에 업로드되나요?',
+                'faq.a3': '아니요, 모든 이미지 처리는 로컬 브라우저에서 이루어집니다. 귀하의 이미지는 어떤 서버에도 업로드되지 않아 개인 정보와 보안이 보호됩니다.',
+                'faq.q4': '자르기 결과가 이상적이지 않은 이유는 무엇인가요?',
+                'faq.a4': '스마트 자르기 결과가 이상적이지 않은 경우 수동 자르기 기능을 사용하여 자르기 영역을 수동으로 조정할 수 있습니다. 또한 이미지의 배경색과 소재색에 명확한 차이가 있는지 확인하세요.',
+                'alert.image': '이미지 파일을 업로드하세요!'
+            }
+        };
+        
+        // 全局变量
+        let cropper = null;
+        let originalImage = null;
+        let croppedImages = [];
+        let currentLang = 'zh-CN';
+        
+        // 语言映射：语言代码 -> URL后缀
+        const langToPath = {
+            'zh-CN': '/zh',
+            'en': '/en',
+            'ja': '/ja',
+            'ko': '/ko'
+        };
+        
+        // URL后缀 -> 语言代码
+        const pathToLang = {
+            '/zh': 'zh-CN',
+            '/en': 'en',
+            '/ja': 'ja',
+            '/ko': 'ko'
+        };
+        
+        // 初始化事件监听
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('fileInput');
+            const uploadArea = document.getElementById('uploadArea');
+            const cropBtn = document.getElementById('cropBtn');
+            const manualCropBtn = document.getElementById('manualCropBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const downloadAllBtn = document.getElementById('downloadAllBtn');
+            const image = document.getElementById('image');
+            
+            // 初始化多语言
+            initI18n();
+            
+            // 监听浏览器前进/后退事件
+            window.addEventListener('popstate', function(event) {
+                const urlLang = getLanguageFromURL();
+                if (urlLang && i18n[urlLang] && urlLang !== currentLang) {
+                    currentLang = urlLang;
+                    document.getElementById('language').value = urlLang;
+                    localStorage.setItem('language', urlLang);
+                    applyI18n();
+                }
+            });
+            
+            // 拖拽上传
+            uploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.style.backgroundColor = '#f0f9ff';
+            });
+            
+            uploadArea.addEventListener('dragleave', function() {
+                this.style.backgroundColor = '';
+            });
+            
+            uploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.style.backgroundColor = '';
+                if (e.dataTransfer.files.length > 0) {
+                    handleFile(e.dataTransfer.files[0]);
+                }
+            });
+            
+            // 点击上传
+            uploadArea.addEventListener('click', function() {
+                fileInput.click();
+            });
+            
+            fileInput.addEventListener('change', function(e) {
+                if (this.files.length > 0) {
+                    handleFile(this.files[0]);
+                }
+            });
+            
+            // 智能裁剪按钮
+            cropBtn.addEventListener('click', smartCrop);
+            
+            // 手动裁剪按钮
+            manualCropBtn.addEventListener('click', manualCrop);
+            
+            // 重置按钮
+            resetBtn.addEventListener('click', reset);
+            
+            // 打包下载按钮
+            downloadAllBtn.addEventListener('click', downloadAll);
+        });
+        
+        // 从URL中获取语言
+        function getLanguageFromURL() {
+            const path = window.location.pathname;
+            // 处理带斜杠的情况，如 /zh/
+            const normalizedPath = path.endsWith('/') ? path.slice(0, -1) : path;
+            
+            if (pathToLang[normalizedPath]) {
+                return pathToLang[normalizedPath];
+            }
+            
+            // 处理更复杂的路径，如 /zh/some/path
+            const firstSegment = normalizedPath.split('/')[1] || '';
+            const langPath = '/' + firstSegment;
+            if (pathToLang[langPath]) {
+                return pathToLang[langPath];
+            }
+            
+            return null;
+        }
+        
+        // 更新URL
+        function updateURL() {
+            const path = langToPath[currentLang] || '';
+            const url = window.location.origin + path + window.location.search + window.location.hash;
+            history.pushState({ lang: currentLang }, '', url);
+        }
+        
+        // 初始化多语言
+        function initI18n() {
+            // 优先从URL获取语言
+            const urlLang = getLanguageFromURL();
+            if (urlLang && i18n[urlLang]) {
+                currentLang = urlLang;
+                document.getElementById('language').value = urlLang;
+                localStorage.setItem('language', urlLang);
+            } else {
+                // 从localStorage获取上次使用的语言
+                const savedLang = localStorage.getItem('language');
+                if (savedLang && i18n[savedLang]) {
+                    currentLang = savedLang;
+                    document.getElementById('language').value = savedLang;
+                }
+                // 更新URL为当前语言
+                updateURL();
+            }
+            
+            // 应用多语言
+            applyI18n();
+        }
+        
+        // 应用多语言
+        function applyI18n() {
+            const lang = i18n[currentLang];
+            
+            // 导航栏
+            document.querySelectorAll('.navbar-menu li a')[0].textContent = lang['nav.home'];
+            document.querySelectorAll('.navbar-menu li a')[1].textContent = lang['nav.features'];
+            document.querySelectorAll('.navbar-menu li a')[2].textContent = lang['nav.instructions'];
+            document.querySelectorAll('.navbar-menu li a')[3].textContent = lang['nav.faq'];
+            
+            // 标题和副标题
+            document.querySelector('.page-title').textContent = lang['title'];
+            document.querySelector('.page-subtitle').textContent = lang['subtitle'];
+            
+            // 功能特点
+            document.querySelectorAll('.description-section h2')[0].textContent = lang['features.title'];
+            document.querySelector('.description-section p').textContent = lang['features.desc'];
+            const featuresList = document.querySelectorAll('.features-list li');
+            featuresList[0].textContent = lang['features.item1'];
+            featuresList[1].textContent = lang['features.item2'];
+            featuresList[2].textContent = lang['features.item3'];
+            featuresList[3].textContent = lang['features.item4'];
+            featuresList[4].textContent = lang['features.item5'];
+            featuresList[5].textContent = lang['features.item6'];
+            
+            // 使用说明
+            document.querySelectorAll('.instructions-section h2')[0].textContent = lang['instructions.title'];
+            const instructionsList = document.querySelectorAll('.instructions-list li');
+            instructionsList[0].textContent = lang['instructions.item1'];
+            instructionsList[1].textContent = lang['instructions.item2'];
+            instructionsList[2].textContent = lang['instructions.item3'];
+            instructionsList[3].textContent = lang['instructions.item4'];
+            instructionsList[4].textContent = lang['instructions.item5'];
+            
+            // 上传区域
+            document.querySelector('.upload-text').textContent = lang['upload.text'];
+            
+            // 按钮
+            document.getElementById('cropBtn').textContent = lang['btn.smartCrop'];
+            document.getElementById('manualCropBtn').textContent = lang['btn.manualCrop'];
+            document.getElementById('resetBtn').textContent = lang['btn.reset'];
+            document.getElementById('downloadAllBtn').textContent = lang['btn.downloadAll'];
+            
+            // 加载状态
+            document.getElementById('loading').textContent = lang['loading'];
+            
+            // 结果区域
+            document.querySelector('.results-section h2').textContent = lang['results.title'];
+            
+            // 常见问题
+            document.querySelectorAll('.description-section h2')[1].textContent = lang['faq.title'];
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems[0].querySelector('h3').textContent = lang['faq.q1'];
+            faqItems[0].querySelector('p').textContent = lang['faq.a1'];
+            faqItems[1].querySelector('h3').textContent = lang['faq.q2'];
+            faqItems[1].querySelector('p').textContent = lang['faq.a2'];
+            faqItems[2].querySelector('h3').textContent = lang['faq.q3'];
+            faqItems[2].querySelector('p').textContent = lang['faq.a3'];
+            faqItems[3].querySelector('h3').textContent = lang['faq.q4'];
+            faqItems[3].querySelector('p').textContent = lang['faq.a4'];
+            
+            // 页脚
+            document.querySelector('.language-selector label').textContent = lang['language.select'];
+            document.querySelector('footer p').textContent = lang['copyright'];
+            
+            // 更新canonical标签
+            const canonicalLink = document.querySelector('link[rel="canonical"]');
+            if (canonicalLink) {
+                const path = langToPath[currentLang] || '';
+                canonicalLink.href = 'https://imgclip.bestguo.top' + path;
+            }
+        }
+        
+        // 切换语言
+        function changeLanguage() {
+            currentLang = document.getElementById('language').value;
+            localStorage.setItem('language', currentLang);
+            applyI18n();
+            updateURL();
+            
+            // 更新裁剪结果中的文本
+            if (croppedImages.length > 0) {
+                displayResults();
+            }
+        }
+        
+        // 处理上传的文件
+        function handleFile(file) {
+            if (!file.type.startsWith('image/')) {
+                alert(i18n[currentLang]['alert.image']);
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const image = document.getElementById('image');
+                image.src = e.target.result;
+                image.style.display = 'block';
+                
+                // 初始化 Cropper
+                if (cropper) {
+                    cropper.destroy();
+                }
+                
+                cropper = new Cropper(image, {
+                    aspectRatio: NaN,
+                    viewMode: 1,
+                    autoCropArea: 0.8,
+                    responsive: true,
+                    scalable: true,
+                    zoomable: true
+                });
+                
+                originalImage = e.target.result;
+                document.getElementById('cropBtn').disabled = false;
+                document.getElementById('manualCropBtn').disabled = false;
+                document.getElementById('resetBtn').disabled = false;
+                clearResults();
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // 智能裁剪
+        function smartCrop() {
+            const loading = document.getElementById('loading');
+            loading.style.display = 'inline-block';
+            document.getElementById('cropBtn').disabled = true;
+            document.getElementById('manualCropBtn').disabled = true;
+            
+            // 获取完整的图片数据
+            const canvas = cropper.getCroppedCanvas();
+            const ctx = canvas.getContext('2d');
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            
+            // 智能检测素材区域
+            const regions = detect素材区域(imageData);
+            
+            // 裁剪每个素材
+            croppedImages = [];
+            regions.forEach((region, index) => {
+                const croppedCanvas = document.createElement('canvas');
+                croppedCanvas.width = region.width;
+                croppedCanvas.height = region.height;
+                const croppedCtx = croppedCanvas.getContext('2d');
+                
+                // 裁剪并绘制到新画布
+                croppedCtx.drawImage(canvas, region.x, region.y, region.width, region.height, 0, 0, region.width, region.height);
+                
+                const dataURL = croppedCanvas.toDataURL('image/png');
+                croppedImages.push({
+                    id: index,
+                    dataURL: dataURL,
+                    width: region.width,
+                    height: region.height
+                });
+            });
+            
+            displayResults();
+            loading.style.display = 'none';
+            document.getElementById('cropBtn').disabled = false;
+            document.getElementById('manualCropBtn').disabled = false;
+            document.getElementById('downloadAllBtn').disabled = false;
+        }
+        
+        // 手动裁剪
+        function manualCrop() {
+            // 获取用户手动选择的裁剪区域
+            const croppedCanvas = cropper.getCroppedCanvas();
+            
+            // 将裁剪结果转换为dataURL
+            const dataURL = croppedCanvas.toDataURL('image/png');
+            
+            // 将裁剪结果添加到croppedImages数组中
+            croppedImages.push({
+                id: croppedImages.length,
+                dataURL: dataURL,
+                width: croppedCanvas.width,
+                height: croppedCanvas.height
+            });
+            
+            // 显示裁剪结果
+            displayResults();
+            
+            // 确保下载所有按钮变为可用状态
+            document.getElementById('downloadAllBtn').disabled = false;
+        }
+        
+        // 检测素材区域的核心算法
+        function detect素材区域(imageData) {
+            const { width, height, data } = imageData;
+            
+            // 获取背景色（使用左上角像素作为背景色）
+            const bgR = data[0];
+            const bgG = data[1];
+            const bgB = data[2];
+            const bgA = data[3];
+            
+            // 基于网格的聚类，网格大小为10像素
+            const gridSize = 10;
+            const grid = {};
+            
+            // 第一步：将非背景像素分配到网格中
+            for (let y = 0; y < height; y++) {
+                for (let x = 0; x < width; x++) {
+                    const index = (y * width + x) * 4;
+                    const r = data[index];
+                    const g = data[index + 1];
+                    const b = data[index + 2];
+                    const a = data[index + 3];
+                    
+                    // 如果不是背景色
+                    if (!isBackgroundColor(r, g, b, a, bgR, bgG, bgB, bgA)) {
+                        const gridX = Math.floor(x / gridSize);
+                        const gridY = Math.floor(y / gridSize);
+                        const gridKey = `${gridX},${gridY}`;
+                        
+                        if (!grid[gridKey]) {
+                            grid[gridKey] = {
+                                minX: x,
+                                maxX: x,
+                                minY: y,
+                                maxY: y,
+                                count: 0
+                            };
+                        }
+                        
+                        const cell = grid[gridKey];
+                        cell.minX = Math.min(cell.minX, x);
+                        cell.maxX = Math.max(cell.maxX, x);
+                        cell.minY = Math.min(cell.minY, y);
+                        cell.maxY = Math.max(cell.maxY, y);
+                        cell.count++;
+                    }
+                }
+            }
+            
+            // 第二步：合并相邻的非空网格
+            const visitedGrids = new Set();
+            const regions = [];
+            
+            // 遍历所有非空网格
+            Object.keys(grid).forEach(gridKey => {
+                if (!visitedGrids.has(gridKey)) {
+                    // 使用广度优先搜索合并相邻网格
+                    const queue = [gridKey];
+                    visitedGrids.add(gridKey);
+                    
+                    let minX = Infinity;
+                    let maxX = -Infinity;
+                    let minY = Infinity;
+                    let maxY = -Infinity;
+                    
+                    while (queue.length > 0) {
+                        const currentKey = queue.shift();
+                        const currentGrid = grid[currentKey];
+                        
+                        // 更新边界
+                        minX = Math.min(minX, currentGrid.minX);
+                        maxX = Math.max(maxX, currentGrid.maxX);
+                        minY = Math.min(minY, currentGrid.minY);
+                        maxY = Math.max(maxY, currentGrid.maxY);
+                        
+                        // 检查8个相邻网格
+                        const [gridX, gridY] = currentKey.split(',').map(Number);
+                        for (let dy = -1; dy <= 1; dy++) {
+                            for (let dx = -1; dx <= 1; dx++) {
+                                if (dx === 0 && dy === 0) continue;
+                                
+                                const neighborKey = `${gridX + dx},${gridY + dy}`;
+                                if (grid[neighborKey] && !visitedGrids.has(neighborKey)) {
+                                    visitedGrids.add(neighborKey);
+                                    queue.push(neighborKey);
+                                }
+                            }
+                        }
+                    }
+                    
+                    // 生成边界框
+                    const region = {
+                        x: minX,
+                        y: minY,
+                        width: maxX - minX + 1,
+                        height: maxY - minY + 1
+                    };
+                    
+                    // 过滤掉太小的区域（可能是噪点）
+                    if (region.width > 10 && region.height > 10) {
+                        regions.push(region);
+                    }
+                }
+            });
+            
+            return regions;
+        }
+        
+        // 判断是否为背景色
+        function isBackgroundColor(r, g, b, a, bgR, bgG, bgB, bgA) {
+            // 颜色相似度判断（容差为20）
+            const colorDiff = Math.abs(r - bgR) + Math.abs(g - bgG) + Math.abs(b - bgB);
+            return colorDiff < 60 && Math.abs(a - bgA) < 50;
+        }
+        
+        // 显示裁剪结果
+        function displayResults() {
+            const resultsGrid = document.getElementById('resultsGrid');
+            resultsGrid.innerHTML = '';
+            const lang = i18n[currentLang];
+            
+            croppedImages.forEach((img, index) => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'result-item';
+                
+                resultItem.innerHTML = `
+                    <img src="${img.dataURL}" alt="${lang['results.title']} ${index + 1}">
+                    <div>${lang['result.size']} ${Math.round(img.width)}x${Math.round(img.height)}</div>
+                    <div>
+                        <button class="btn" onclick="downloadImage(${index})">${lang['btn.download']}</button>
+                        <button class="btn" onclick="deleteImage(${index})">${lang['btn.delete']}</button>
+                    </div>
+                `;
+                
+                resultsGrid.appendChild(resultItem);
+            });
+        }
+        
+        // 下载单个图片
+        function downloadImage(index) {
+            const img = croppedImages[index];
+            const link = document.createElement('a');
+            link.download = `cropped_${index + 1}.png`;
+            link.href = img.dataURL;
+            link.click();
+        }
+        
+        // 删除单个图片
+        function deleteImage(index) {
+            croppedImages.splice(index, 1);
+            displayResults();
+            
+            if (croppedImages.length === 0) {
+                document.getElementById('downloadAllBtn').disabled = true;
+            }
+        }
+        
+        // 打包下载所有图片
+        function downloadAll() {
+            if (croppedImages.length === 0) return;
+            
+            const zip = new JSZip();
+            
+            croppedImages.forEach((img, index) => {
+                // 将 base64 转换为 blob
+                const base64Data = img.dataURL.split(',')[1];
+                const blob = base64ToBlob(base64Data, 'image/png');
+                zip.file(`cropped_${index + 1}.png`, blob);
+            });
+            
+            zip.generateAsync({ type: 'blob' }).then(function(content) {
+                saveAs(content, 'cropped_images.zip');
+            });
+        }
+        
+        // base64 转 blob
+        function base64ToBlob(base64, mime) {
+            const byteCharacters = atob(base64);
+            const byteArrays = [];
+            
+            for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+                const slice = byteCharacters.slice(offset, offset + 512);
+                const byteNumbers = new Array(slice.length);
+                
+                for (let i = 0; i < slice.length; i++) {
+                    byteNumbers[i] = slice.charCodeAt(i);
+                }
+                
+                const byteArray = new Uint8Array(byteNumbers);
+                byteArrays.push(byteArray);
+            }
+            
+            return new Blob(byteArrays, { type: mime });
+        }
+        
+        // 重置
+        function reset() {
+            if (cropper) {
+                cropper.destroy();
+                cropper = null;
+            }
+            
+            const image = document.getElementById('image');
+            image.src = '';
+            image.style.display = 'none';
+            
+            document.getElementById('cropBtn').disabled = true;
+            document.getElementById('manualCropBtn').disabled = true;
+            document.getElementById('resetBtn').disabled = true;
+            document.getElementById('downloadAllBtn').disabled = true;
+            
+            clearResults();
+            originalImage = null;
+            croppedImages = [];
+        }
+        
+        // 清空结果
+        function clearResults() {
+            const resultsGrid = document.getElementById('resultsGrid');
+            resultsGrid.innerHTML = '';
+            croppedImages = [];
+            document.getElementById('downloadAllBtn').disabled = true;
+        }
+    </script>
+    <script type='text/javascript' src='//pl28165289.effectivegatecpm.com/33/12/3b/33123b4242952694f72d6972f5716344.js'></script>
+    
+</body>
+</html>
