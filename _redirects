@@ -1,15 +1,2 @@
 # Cloudflare Pages 重定向规则
-# 将所有带有语言后缀的请求重定向到 index.html
-/zh/*    /index.html   200
-/en/*    /index.html   200
-/ja/*    /index.html   200
-/ko/*    /index.html   200
-
-# 根路径重定向到默认语言
-/        /zh           301
-
-# 处理直接访问语言路径的情况
-/zh      /index.html   200
-/en      /index.html   200
-/ja      /index.html   200
-/ko      /index.html   200
+/*  /index.html  200
