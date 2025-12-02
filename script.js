@@ -558,73 +558,112 @@ function manualCrop() {
     document.getElementById('downloadAllBtn').disabled = false;
 }
 
-// 检测素材区域的核心算法
+/**
+ * 优化后的检测算法：使用像素级连通域搜索（BFS）
+ * 解决了素材垂直粘连和识别不全的问题
+ */
 function detectRange(imageData) {
     const { width, height, data } = imageData;
-    const bgR = data[0], bgG = data[1], bgB = data[2], bgA = data[3];
-    const gridSize = 10;
-    const grid = {};
+    // 使用 Uint8Array 标记已访问的像素，性能比 Set 快得多 (0:未访问, 1:已访问)
+    const visited = new Uint8Array(width * height);
+    const regions = [];
     
-    // 1. 网格聚类
+    // 获取背景色（取左上角第一个像素作为基准背景色）
+    const bgR = data[0], bgG = data[1], bgB = data[2], bgA = data[3];
+    
+    // 颜色容差（防止轻微的噪点或压缩导致背景不纯）
+    const tolerance = 15; 
+
+    // 判断是否为背景像素的辅助函数
+    function isBackground(r, g, b, a) {
+        // 如果是完全透明，直接视为背景
+        if (a === 0) return true;
+        // 如果不透明，检查是否接近背景色
+        return Math.abs(r - bgR) < tolerance &&
+               Math.abs(g - bgG) < tolerance &&
+               Math.abs(b - bgB) < tolerance &&
+               Math.abs(a - bgA) < tolerance;
+    }
+
+    // 遍历所有像素
     for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
-            const index = (y * width + x) * 4;
-            // 简单的背景判断: 颜色和Alpha都很接近
-            if (!isBackgroundColor(data[index], data[index+1], data[index+2], data[index+3], bgR, bgG, bgB, bgA)) {
-                const gridX = Math.floor(x / gridSize);
-                const gridY = Math.floor(y / gridSize);
-                const key = `${gridX},${gridY}`;
+            const index = y * width + x;
+            
+            // 如果该像素已被访问过，跳过
+            if (visited[index] === 1) continue;
+            
+            const pos = index * 4;
+            const r = data[pos], g = data[pos+1], b = data[pos+2], a = data[pos+3];
+
+            // 如果发现一个非背景像素，且未访问过，说明发现了一个新物体 -> 开始泛洪填充
+            if (!isBackground(r, g, b, a)) {
+                // 初始化包围盒
+                let minX = x, maxX = x, minY = y, maxY = y;
                 
-                if (!grid[key]) grid[key] = { minX: x, maxX: x, minY: y, maxY: y };
-                else {
-                    const c = grid[key];
-                    c.minX = Math.min(c.minX, x);
-                    c.maxX = Math.max(c.maxX, x);
-                    c.minY = Math.min(c.minY, y);
-                    c.maxY = Math.max(c.maxY, y);
+                //以此像素为起点进行 BFS 广度优先搜索
+                const queue = [index];
+                visited[index] = 1; // 标记起点
+
+                let pixelCount = 0; // 记录该物体包含的像素数，用于过滤噪点
+
+                while (queue.length > 0) {
+                    const currIndex = queue.shift(); // 取出队列头部
+                    pixelCount++;
+
+                    const cx = currIndex % width;
+                    const cy = Math.floor(currIndex / width);
+
+                    // 更新包围盒
+                    if (cx < minX) minX = cx;
+                    if (cx > maxX) maxX = cx;
+                    if (cy < minY) minY = cy;
+                    if (cy > maxY) maxY = cy;
+
+                    // 检查 8 邻域 (上下左右 + 对角线)
+                    // 如果希望分割得更细（不粘连对角线接触的物体），可以改成 4 邻域
+                    const neighbors = [
+                        [-1, -1], [0, -1], [1, -1],
+                        [-1,  0],          [1,  0],
+                        [-1,  1], [0,  1], [1,  1]
+                    ];
+
+                    for (let i = 0; i < neighbors.length; i++) {
+                        const nx = cx + neighbors[i][0];
+                        const ny = cy + neighbors[i][1];
+
+                        // 边界检查
+                        if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+                            const nIndex = ny * width + nx;
+                            
+                            if (visited[nIndex] === 0) {
+                                const nPos = nIndex * 4;
+                                const nr = data[nPos], ng = data[nPos+1], nb = data[nPos+2], na = data[nPos+3];
+                                
+                                // 如果邻居也不是背景，加入队列
+                                if (!isBackground(nr, ng, nb, na)) {
+                                    visited[nIndex] = 1; // 标记为已访问，防止重复加入
+                                    queue.push(nIndex);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // 过滤极小的噪点（例如像素数小于10 或 宽高太小的）
+                const w = maxX - minX + 1;
+                const h = maxY - minY + 1;
+                if (pixelCount > 20 && w > 4 && h > 4) {
+                    regions.push({ 
+                        x: minX, 
+                        y: minY, 
+                        width: w, 
+                        height: h 
+                    });
                 }
             }
         }
     }
-    
-    // 2. 合并网格
-    const visited = new Set();
-    const regions = [];
-    
-    Object.keys(grid).forEach(key => {
-        if (!visited.has(key)) {
-            const queue = [key];
-            visited.add(key);
-            let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-            
-            while (queue.length) {
-                const k = queue.shift();
-                const c = grid[k];
-                minX = Math.min(minX, c.minX);
-                maxX = Math.max(maxX, c.maxX);
-                minY = Math.min(minY, c.minY);
-                maxY = Math.max(maxY, c.maxY);
-                
-                const [gx, gy] = k.split(',').map(Number);
-                for (let dy = -1; dy <= 1; dy++) {
-                    for (let dx = -1; dx <= 1; dx++) {
-                        const nk = `${gx+dx},${gy+dy}`;
-                        if (grid[nk] && !visited.has(nk)) {
-                            visited.add(nk);
-                            queue.push(nk);
-                        }
-                    }
-                }
-            }
-            
-            // 过滤极小噪点
-            const w = maxX - minX + 1;
-            const h = maxY - minY + 1;
-            if (w > 5 && h > 5) {
-                regions.push({ x: minX, y: minY, width: w, height: h });
-            }
-        }
-    });
     
     return regions;
 }
