@@ -59,7 +59,7 @@ const i18n = {
     },
     'en': {
         'nav.home': 'Home', 'nav.features': 'Features', 'nav.faq': 'FAQ', 'nav.scene': 'Use Cases',
-        'title': 'Smart Image Splitter',
+        'title': 'Smart Image Splitter - Auto Crop & Extract Sprites Online',
         'subtitle': 'Automatically split images containing multiple elements into separate PNG files.',
         
         'demo.step1': '📂 Upload Sprite/Image',
@@ -107,7 +107,7 @@ const i18n = {
     },
     'ja': {
         'nav.home': 'ホーム', 'nav.features': '機能', 'nav.faq': 'FAQ', 'nav.scene': '利用シーン',
-        'title': 'スマート画像分割ツール',
+        'title': '画像自動分割ツール - スプライトシートや素材を一括切り抜き',
         'subtitle': '複数の要素を含む画像を自動的に個別のPNGファイルに分割します',
         
         'demo.step1': '📂 画像をアップロード',
@@ -155,7 +155,7 @@ const i18n = {
     },
     'ko': {
         'nav.home': '홈', 'nav.features': '기능', 'nav.faq': 'FAQ', 'nav.scene': '사용 사례',
-        'title': '스마트 이미지 분할 도구',
+        'title': '스마트 이미지 분할 도구 - 스프라이트 및 사진 자동 자르기',
         'subtitle': '여러 요소가 포함된 이미지를 개별 PNG 파일로 자동 분할합니다.',
         
         'demo.step1': '📂 이미지 업로드',
@@ -350,6 +350,26 @@ function applyI18n() {
         if (el && t[key]) el.textContent = t[key];
     };
 
+    // 更新title标签
+    if (t['title']) {
+        let titleText = t['title'];
+        let ogTitleText = t['title'];
+        
+        // 使用完整的标题（已在i18n对象中包含副标题）
+        titleText = t['title'];
+        ogTitleText = t['title'];
+        
+        // 更新页面title
+        document.title = titleText;
+        
+        // 更新Open Graph和Twitter Card title
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) ogTitle.setAttribute('content', ogTitleText);
+        
+        const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+        if (twitterTitle) twitterTitle.setAttribute('content', ogTitleText);
+    }
+
     // 导航
     setText('.nav-home', 'nav.home');
     setText('.nav-features', 'nav.features');
@@ -413,6 +433,48 @@ function applyI18n() {
         
         if(h3s[1]) h3s[1].textContent = t['seo.h3.2'];
         if(ps[2]) ps[2].textContent = t['seo.p3'];
+    }
+
+    // 更新meta标签（描述和关键词）
+    const descriptions = {
+        'zh-CN': '免费在线图片素材拆分工具，自动识别一张图片中的多个独立元素并裁剪为单独的PNG文件。适合游戏Sprite精灵图拆分、贴纸素材提取、电商拼图切片。',
+        'en': 'Free online tool to auto-split sprite sheets and scanned photos into separate PNG images. One-click batch extraction. Local processing, privacy safe.',
+        'ja': 'スプライトシートやスキャンした写真を自動的に個別のPNG画像に分割・切り抜きできる無料オンラインツール。ブラウザ完結でプライバシーも安心。',
+        'ko': '스프라이트 시트나 스캔한 사진에서 여러 이미지를 자동으로 감지하여 개별 PNG로 분할해 주는 무료 온라인 도구입니다. 100% 로컬 처리로 안전합니다.'
+    };
+    
+    const ogDescriptions = {
+        'zh-CN': '自动识别并拆分一张图片中的多个独立素材，一键导出为单独的PNG文件。纯本地处理，保护隐私。',
+        'en': 'Automatically detect and split multiple objects from a single image. Export as separate PNGs. 100% local processing.',
+        'ja': '一枚の画像に含まれる複数の要素を自動認識して分割し、個別のPNGとして保存します。インストール不要、完全無料。',
+        'ko': '하나의 이미지에 포함된 여러 요소를 자동으로 인식하여 분할하고 저장합니다. 서버 업로드 없이 브라우저에서 바로 처리하세요.'
+    };
+    
+    const keywords = {
+        'zh-CN': '图片素材拆分,图片分割工具,Sprite切片,精灵图拆分,在线切图,图片素材提取,批量裁剪,PNG分割',
+        'en': 'image splitter, sprite sheet cutter, auto crop multiple photos, extract images from image, sprite slicer, online image separator',
+        'ja': '画像分割, スプライトシート分割, 画像切り抜き, 自動切り抜き, 一括保存, 素材抽出, オンラインツール',
+        'ko': '이미지 분할, 스프라이트 자르기, 사진 자동 자르기, 이미지 추출, 누끼따기, 온라인 이미지 편집'
+    };
+    
+    // 更新meta description
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && descriptions[currentLang]) {
+        metaDesc.setAttribute('content', descriptions[currentLang]);
+    }
+    
+    // 更新meta keywords
+    const metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (metaKeywords && keywords[currentLang]) {
+        metaKeywords.setAttribute('content', keywords[currentLang]);
+    }
+    
+    // 更新og:description和twitter:description
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    const twitterDesc = document.querySelector('meta[name="twitter:description"]');
+    if (ogDesc && twitterDesc && ogDescriptions[currentLang]) {
+        ogDesc.setAttribute('content', ogDescriptions[currentLang]);
+        twitterDesc.setAttribute('content', ogDescriptions[currentLang]);
     }
 
     // FAQ
