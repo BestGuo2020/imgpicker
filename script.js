@@ -58,7 +58,19 @@ const i18n = {
         'faq.a5': '这是由于原图的“抗锯齿”处理或JPG压缩导致的半透明过渡像素。为了防止误删物体本身的细节（如头发、眼睛），算法会保留这些边缘。对于高精度需求，建议使用专业PS软件微调。',
         
         'copyright': '© 2025 智能图片素材拆分工具. 保留所有权利.',
-        'alert.image': '请上传图片文件！'
+        'alert.image': '请上传图片文件！',
+
+        // 新增 Schema 翻译
+        'schema.websiteName': '智能图片素材拆分工具',
+        'schema.websiteDesc': '免费在线将一张图片拆分为多个素材文件',
+        'schema.toolDesc': '免费在线工具，用于将包含多个元素的单个图像自动分割成多个独立的PNG文件。支持批量上传和本地处理。',
+        'schema.featureList': [
+            "自动识别一张图中的多个独立素材区域",
+            "一键将大图拆分为多个单独的PNG小图",
+            "100%本地处理，断网可用，保护隐私",
+            "批量处理，支持一次上传多张拼图",
+            "支持打包下载拆分后的素材"
+        ]
     },
     'en': {
         'nav.home': 'Home', 'nav.features': 'Features', 'nav.faq': 'FAQ', 'nav.scene': 'Use Cases',
@@ -109,7 +121,18 @@ const i18n = {
         'faq.a5': 'This is caused by anti-aliasing or JPG compression artifacts. To prevent deleting object details, the algorithm preserves these transition pixels.',
 
         'copyright': '© 2025 Smart Image Splitter. All Rights Reserved.',
-        'alert.image': 'Please upload an image file!'
+        'alert.image': 'Please upload an image file!',
+
+        'schema.websiteName': 'Smart Image Splitter',
+        'schema.websiteDesc': 'Free online tool to split one image into multiple image files',
+        'schema.toolDesc': 'Free online tool to automatically split a single image containing multiple elements into separate PNG files. Supports batch upload and local processing.',
+        'schema.featureList': [
+            "Auto-detect multiple independent objects in one image",
+            "One-click split large image into separate small PNGs",
+            "100% local processing, works offline, privacy safe",
+            "Batch processing, upload multiple sprite sheets at once",
+            "Download all cropped assets as a ZIP file"
+        ]
     },
     'ja': {
         'nav.home': 'ホーム', 'nav.features': '機能', 'nav.faq': 'FAQ', 'nav.scene': '利用シーン',
@@ -160,7 +183,18 @@ const i18n = {
         'faq.a5': 'アンチエイリアス処理やJPG圧縮による半透明ピクセルが原因です。物体の細部（目や髪など）を保護するため、これらは保持されます。',
         
         'copyright': '© 2025 Smart Image Splitter. All Rights Reserved.',
-        'alert.image': '画像ファイルをアップロードしてください！'
+        'alert.image': '画像ファイルをアップロードしてください！',
+
+        'schema.websiteName': '画像自動分割ツール',
+        'schema.websiteDesc': '1枚の画像を複数の素材ファイルに無料オンライン分割',
+        'schema.toolDesc': '複数の要素を含む画像を自動的に個別のPNGファイルに分割する無料オンラインツール。一括アップロードとローカル処理に対応。',
+        'schema.featureList': [
+            "画像内の複数の独立したオブジェクトを自動検出",
+            "ワンクリックで大きな画像を小さなPNGに分割",
+            "100%ローカル処理、オフライン対応、プライバシー保護",
+            "一括処理、複数のスプライトシートを同時アップロード",
+            "分割した素材をZIPで一括ダウンロード"
+        ]
     },
     'ko': {
         'nav.home': '홈', 'nav.features': '기능', 'nav.faq': 'FAQ', 'nav.scene': '사용 사례',
@@ -211,7 +245,18 @@ const i18n = {
         'faq.a5': '안티앨리어싱 처리나 JPG 압축 노이즈 때문입니다. 객체의 디테일을 보호하기 위해 알고리즘은 이러한 가장자리를 보존합니다.',
         
         'copyright': '© 2025 Smart Image Splitter. All Rights Reserved.',
-        'alert.image': '이미지 파일을 업로드해주세요!'
+        'alert.image': '이미지 파일을 업로드해주세요!',
+
+        'schema.websiteName': '스마트 이미지 분할 도구',
+        'schema.websiteDesc': '하나의 이미지를 여러 소재 파일로 분할하는 무료 온라인 도구',
+        'schema.toolDesc': '여러 요소가 포함된 단일 이미지를 별도의 PNG 파일로 자동 분할하는 무료 온라인 도구입니다. 일괄 업로드 및 로컬 처리를 지원합니다.',
+        'schema.featureList': [
+            "이미지 내의 여러 독립 개체 자동 감지",
+            "원클릭으로 큰 이미지를 별도의 작은 PNG로 분할",
+            "100% 로컬 처리, 오프라인 사용 가능, 개인정보 보호",
+            "일괄 처리, 여러 스프라이트 시트 동시 업로드 지원",
+            "분할된 소재를 ZIP 파일로 일괄 다운로드"
+        ]
     }
 };
 
@@ -537,6 +582,32 @@ function applyI18n() {
 
     // 页脚
     setText('.copyright', 'copyright');
+
+    // --- 新增：更新 JSON-LD (Schema) ---
+    // 更新 WebSite Schema
+    const websiteScript = document.getElementById('ld-website');
+    if (websiteScript) {
+        try {
+            const data = JSON.parse(websiteScript.textContent);
+            data.name = t['schema.websiteName'];
+            data.description = t['schema.websiteDesc'];
+            // 可选：更新 URL 以匹配当前语言路径
+            // data.url = window.location.href; 
+            websiteScript.textContent = JSON.stringify(data, null, 4);
+        } catch (e) { console.error('Error updating WebSite schema', e); }
+    }
+
+    // 更新 Tool Schema
+    const toolScript = document.getElementById('ld-tool');
+    if (toolScript) {
+        try {
+            const data = JSON.parse(toolScript.textContent);
+            data.name = t['schema.websiteName'];
+            data.description = t['schema.toolDesc'];
+            data.featureList = t['schema.featureList'];
+            toolScript.textContent = JSON.stringify(data, null, 4);
+        } catch (e) { console.error('Error updating Tool schema', e); }
+    }
 }
 
 // 切换语言
