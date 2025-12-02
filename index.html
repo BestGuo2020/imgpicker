@@ -303,6 +303,7 @@
                     <li><a href="#" class="nav-home">首页</a></li>
                     <li><a href="#features" class="nav-features">功能</a></li>
                     <li><a href="#seo-content" class="nav-faq">场景</a></li>
+                    <li><a href="#faq" class="nav-faq">FAQ</a></li>
                 </ul>
                 <select id="language" onchange="changeLanguage()" class="lang-select">
                     <option value="zh-CN">简体中文</option>
@@ -444,6 +445,10 @@
             <details>
                 <summary class="q4">有文件大小限制吗？</summary>
                 <p class="a4">没有硬性限制，但由于是本地浏览器处理，过大的图片（如超过 50MB）可能会受限于您设备的内存大小。</p>
+            </details>
+            <details>
+                <summary class="q5">去底后边缘为什么还有杂色？</summary>
+                <p class="a5">这是由于原图的“抗锯齿”处理或JPG压缩导致的半透明过渡像素。为了防止误删物体本身的细节（如头发、眼睛），算法会保留这些边缘。对于高精度需求，建议使用专业PS软件微调。</p>
             </details>
         </div>
 

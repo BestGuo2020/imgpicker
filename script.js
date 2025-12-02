@@ -54,6 +54,8 @@ const i18n = {
         'faq.a3': '只要元素之间有像素间隔（即使只有 1px），工具就能识别为两个物体。如果元素重叠，建议使用“手动拆分”功能。',
         'faq.q4': '有文件大小限制吗？',
         'faq.a4': '没有硬性限制，但由于是本地浏览器处理，过大的图片（如超过 50MB）可能会受限于您设备的内存大小。',
+        'faq.q5': '去底后边缘为什么还有杂色？',
+        'faq.a5': '这是由于原图的“抗锯齿”处理或JPG压缩导致的半透明过渡像素。为了防止误删物体本身的细节（如头发、眼睛），算法会保留这些边缘。对于高精度需求，建议使用专业PS软件微调。',
         
         'copyright': '© 2025 智能图片素材拆分工具. 保留所有权利.',
         'alert.image': '请上传图片文件！'
@@ -103,7 +105,9 @@ const i18n = {
         'faq.a3': 'Yes, as long as there is at least 1px gap between elements. If they overlap, use "Manual Split".',
         'faq.q4': 'Is there a file size limit?',
         'faq.a4': 'No hard limit, but since it processes locally, very large images (50MB+) depend on your device memory.',
-        
+        'faq.q5': 'Why are there still colored edges?',
+        'faq.a5': 'This is caused by anti-aliasing or JPG compression artifacts. To prevent deleting object details, the algorithm preserves these transition pixels.',
+
         'copyright': '© 2025 Smart Image Splitter. All Rights Reserved.',
         'alert.image': 'Please upload an image file!'
     },
@@ -152,6 +156,8 @@ const i18n = {
         'faq.a3': '1ピクセルでも隙間があれば分割可能です。重なっている場合は「手動分割」を使用してください。',
         'faq.q4': 'ファイルサイズ制限は？',
         'faq.a4': '制限はありませんが、ブラウザで処理するため、メモリ依存となります（50MB以上は注意）。',
+         'faq.q5': '背景除去後に縁が残るのはなぜ？',
+        'faq.a5': 'アンチエイリアス処理やJPG圧縮による半透明ピクセルが原因です。物体の細部（目や髪など）を保護するため、これらは保持されます。',
         
         'copyright': '© 2025 Smart Image Splitter. All Rights Reserved.',
         'alert.image': '画像ファイルをアップロードしてください！'
@@ -201,6 +207,8 @@ const i18n = {
         'faq.a3': '1픽셀이라도 간격이 있으면 분할 가능합니다. 겹쳐 있는 경우 "수동 분할"을 사용하세요.',
         'faq.q4': '파일 크기 제한이 있나요?',
         'faq.a4': '제한은 없지만 로컬 브라우저 처리이므로 장치 메모리에 따라 다릅니다 (50MB 이상 주의).',
+        'faq.q5': '배경 제거 후 가장자리에 색이 남는 이유는?',
+        'faq.a5': '안티앨리어싱 처리나 JPG 압축 노이즈 때문입니다. 객체의 디테일을 보호하기 위해 알고리즘은 이러한 가장자리를 보존합니다.',
         
         'copyright': '© 2025 Smart Image Splitter. All Rights Reserved.',
         'alert.image': '이미지 파일을 업로드해주세요!'
@@ -525,6 +533,7 @@ function applyI18n() {
     setText('.q2', 'faq.q2'); setText('.a2', 'faq.a2');
     setText('.q3', 'faq.q3'); setText('.a3', 'faq.a3');
     setText('.q4', 'faq.q4'); setText('.a4', 'faq.a4');
+    setText('.q5', 'faq.q5'); setText('.a5', 'faq.a5');
 
     // 页脚
     setText('.copyright', 'copyright');
@@ -1140,7 +1149,7 @@ function displayResults() {
             <img src="${img.dataURL}" alt="Result ${index + 1}">
             <div>${lang['result.size']} ${Math.round(img.width)}x${Math.round(img.height)}</div>
             <div style="display: flex; gap: 5px; margin-top: 5px; width: 100%;">
-                <button class="btn btn-primary" style="flex:1; padding:6px; font-size:13px;" onclick="downloadImage(${index})">
+                <button class="btn btn-primary" style="flex:1; padding:6px; font-size:13px; justify-content: center;" onclick="downloadImage(${index})">
                     ${lang['btn.download']}
                 </button>
                 <button class="btn btn-outline" style="padding:6px 12px; font-size:13px;" onclick="deleteImage(${index})">
