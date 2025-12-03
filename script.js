@@ -40,7 +40,7 @@ const i18n = {
         'seo.title': '为什么需要 ImgCrop 图片素材拆分工具?',
         'seo.p1': '在游戏开发、平面设计和电商运营中，我们经常遇到需要将“一张大图”里的“多个小元素”拆分出来的场景。手动用 PS 切图费时费力，而 ImgCrop 可以一键搞定。',
         'seo.h3.1': '游戏开发者的利器 (Sprite Slicer)',
-        'seo.p2': '如果您手头有 Sprite Sheet（精灵图）资源，需要将角色动作分解为单帧图片，ImgCrop 可以自动识别透明区域间隔，精准切割每一帧，导出为透明 PNG。',
+        'seo.p2': '如果您手头有 Sprite Sheet（精灵图）资源，ImgCrop 不仅能自动识别透明区域精准切割，还能严格按照原图“从上到下、从左到右”的视觉顺序导出素材，确保动画帧序不乱。',
         'seo.h3.2': '手账与电商素材整理',
         'seo.p3': '对于电商美工或手账爱好者，经常需要从一张包含多个贴纸、标签或商品的拼图中提取素材。使用本工具，只需拖入图片，即可自动识别并分割所有独立商品图。',
 
@@ -56,6 +56,8 @@ const i18n = {
         'faq.a4': '没有硬性限制，但由于是本地浏览器处理，过大的图片（如超过 50MB）可能会受限于您设备的内存大小。',
         'faq.q5': '去底后边缘为什么还有杂色？',
         'faq.a5': '这是由于原图的“抗锯齿”处理或JPG压缩导致的半透明过渡像素。为了防止误删物体本身的细节（如头发、眼睛），算法会保留这些边缘。对于高精度需求，建议使用专业PS软件微调。',
+        'faq.q6': '相比下载桌面软件，使用在线工具有什么优势？',
+        'faq.a6': '跨平台：无论 Windows/Mac/iPad，打开浏览器即用。<br>零安装：无病毒风险，无需配置环境。<br>隐私保护：利用 WebAssembly 技术，图片仅在本地浏览器内存中处理，不上传云端，断网也能用。',
         
         'copyright': '© 2025 智能图片素材拆分工具. 保留所有权利.',
         'alert.image': '请上传图片文件！',
@@ -104,7 +106,7 @@ const i18n = {
         'seo.title': 'Why use ImgCrop Image Splitter?',
         'seo.p1': 'In game dev and design, separating multiple elements from a single image is common. ImgCrop automates this tedious process instantly.',
         'seo.h3.1': 'For Game Developers (Sprite Slicer)',
-        'seo.p2': 'Easily split Sprite Sheets into single frames. ImgCrop detects transparent gaps and cuts precisely, exporting as transparent PNGs.',
+        'seo.p2': 'Easily split Sprite Sheets into single frames. ImgCrop cuts precisely and exports assets in the exact visual order (Top-to-Bottom, Left-to-Right) to keep animation frames organized.',
         'seo.h3.2': 'For Designers & Scrapbooking',
         'seo.p3': 'Extract individual stickers, labels, or products from composite images. Just drag and drop to identify and split all items.',
 
@@ -119,6 +121,8 @@ const i18n = {
         'faq.a4': 'No hard limit, but since it processes locally, very large images (50MB+) depend on your device memory.',
         'faq.q5': 'Why are there still colored edges?',
         'faq.a5': 'This is caused by anti-aliasing or JPG compression artifacts. To prevent deleting object details, the algorithm preserves these transition pixels.',
+        'faq.q6': 'Advantages over desktop software?',
+        'faq.a6': 'Cross-platform: Works on Windows, Mac, or iPad via browser. <br>Zero Install: No complex config or virus risks. <br>Privacy: Uses WebAssembly for local processing; images remain in your browser memory and are never uploaded, working even offline.',
 
         'copyright': '© 2025 Smart Image Splitter. All Rights Reserved.',
         'alert.image': 'Please upload an image file!',
@@ -126,6 +130,7 @@ const i18n = {
         'schema.websiteName': 'Smart Image Splitter',
         'schema.websiteDesc': 'Free online tool to split one image into multiple image files',
         'schema.toolDesc': 'Free online tool to automatically split a single image containing multiple elements into separate PNG files. Supports batch upload and local processing.',
+
         'schema.featureList': [
             "Auto-detect multiple independent objects in one image",
             "One-click split large image into separate small PNGs",
@@ -166,7 +171,7 @@ const i18n = {
         'seo.title': 'なぜ ImgCrop 画像分割ツールなのか？',
         'seo.p1': 'ゲーム開発やデザインにおいて、1枚の画像から複数の要素を切り出す作業は面倒です。ImgCropなら一瞬で完了します。',
         'seo.h3.1': 'ゲーム開発者向け (Sprite Slicer)',
-        'seo.p2': 'スプライトシートを個別のフレームに分割。透明部分を認識し、正確にカットして透過PNGとして書き出します。',
+        'seo.p2': 'スプライトシートを個別のフレームに分割します。元画像の並び順（上から下、左から右）通りに正確に書き出すため、アニメーションの順番が崩れません。',
         'seo.h3.2': 'デザイン・素材整理',
         'seo.p3': '複数の商品やステッカーが含まれる画像から、個々のアイテムを抽出します。ドラッグ＆ドロップするだけです。',
 
@@ -179,8 +184,10 @@ const i18n = {
         'faq.a3': '1ピクセルでも隙間があれば分割可能です。重なっている場合は「手動分割」を使用してください。',
         'faq.q4': 'ファイルサイズ制限は？',
         'faq.a4': '制限はありませんが、ブラウザで処理するため、メモリ依存となります（50MB以上は注意）。',
-         'faq.q5': '背景除去後に縁が残るのはなぜ？',
+        'faq.q5': '背景除去後に縁が残るのはなぜ？',
         'faq.a5': 'アンチエイリアス処理やJPG圧縮による半透明ピクセルが原因です。物体の細部（目や髪など）を保護するため、これらは保持されます。',
+        'faq.q6': 'デスクトップソフトと比較した利点は？',
+        'faq.a6': 'マルチプラットフォーム：Windows/Mac/iPadなど、ブラウザがあれば即座に使えます。<br>インストール不要：ウイルスリスクや設定の手間がありません。<br>プライバシー保護：WebAssembly技術により、画像はローカルメモリ内でのみ処理され、サーバーには送信されません。<br>オフラインでも動作します。',
         
         'copyright': '© 2025 Smart Image Splitter. All Rights Reserved.',
         'alert.image': '画像ファイルをアップロードしてください！',
@@ -228,7 +235,7 @@ const i18n = {
         'seo.title': '왜 ImgCrop 이미지 분할 도구인가요?',
         'seo.p1': '게임 개발 및 디자인에서 하나의 이미지에서 여러 요소를 분리하는 작업은 번거롭습니다. ImgCrop으로 자동화하세요.',
         'seo.h3.1': '게임 개발자용 (Sprite Slicer)',
-        'seo.p2': '스프라이트 시트를 개별 프레임으로 분할합니다. 투명 간격을 인식하여 정확하게 자르고 투명 PNG로 내보냅니다.',
+        'seo.p2': '스프라이트 시트를 개별 프레임으로 분할합니다. 원본 이미지의 순서(위에서 아래, 왼쪽에서 오른쪽) 그대로 내보내어 애니메이션 프레임 순서를 유지합니다.',
         'seo.h3.2': '디자인 및 소재 정리',
         'seo.p3': '여러 상품이나 스티커가 포함된 이미지에서 개별 아이템을 추출합니다. 드래그 앤 드롭만 하세요.',
 
@@ -243,6 +250,8 @@ const i18n = {
         'faq.a4': '제한은 없지만 로컬 브라우저 처리이므로 장치 메모리에 따라 다릅니다 (50MB 이상 주의).',
         'faq.q5': '배경 제거 후 가장자리에 색이 남는 이유는?',
         'faq.a5': '안티앨리어싱 처리나 JPG 압축 노이즈 때문입니다. 객체의 디테일을 보호하기 위해 알고리즘은 이러한 가장자리를 보존합니다.',
+        'faq.q6': '데스크톱 소프트웨어보다 나은 점은 무엇인가요?',
+        'faq.a6': '크로스 플랫폼: Windows, Mac, iPad 어디서든 브라우저만 열면 됩니다. <br>설치 불필요: 바이러스 위험이나 복잡한 설정이 없습니다. <br>개인정보 보호: WebAssembly 기술을 사용하여 이미지가 로컬 브라우저 메모리에서만 처리되며, 서버로 전송되지 않습니다. 오프라인에서도 작동합니다.',
         
         'copyright': '© 2025 Smart Image Splitter. All Rights Reserved.',
         'alert.image': '이미지 파일을 업로드해주세요!',
@@ -441,7 +450,7 @@ function applyI18n() {
 
     const setText = (selector, key) => {
         const el = document.querySelector(selector);
-        if (el && t[key]) el.textContent = t[key];
+        if (el && t[key]) el.innerHTML = t[key];
     };
 
     // 更新title标签
@@ -579,6 +588,7 @@ function applyI18n() {
     setText('.q3', 'faq.q3'); setText('.a3', 'faq.a3');
     setText('.q4', 'faq.q4'); setText('.a4', 'faq.a4');
     setText('.q5', 'faq.q5'); setText('.a5', 'faq.a5');
+    setText('.q6', 'faq.q6'); setText('.a6', 'faq.a6');
 
     // 页脚
     setText('.copyright', 'copyright');
