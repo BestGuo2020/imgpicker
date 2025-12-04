@@ -23,6 +23,7 @@ const i18n = {
         'btn.reset': '🔄 重置', 
         'btn.downloadAll': '📥 打包下载',
         'btn.bgRemove': '一键去底',
+        'btn.bgRemoveThenCrop': '先去底再拆分',
         'loading': '正在分析画布并拆分素材...',
         
         // 结果
@@ -92,6 +93,7 @@ const i18n = {
         'btn.reset': '🔄 Reset', 
         'btn.downloadAll': '📥 Download All',
         'btn.bgRemove': 'Remove Background',
+        'btn.bgRemoveThenCrop': 'Remove BG Then Split',
         'loading': 'Analyzing and splitting...',
         
         'results.title': 'Results',
@@ -157,6 +159,7 @@ const i18n = {
         'btn.reset': '🔄 リセット', 
         'btn.downloadAll': '📥 一括DL',
         'btn.bgRemove': '背景除去',
+        'btn.bgRemoveThenCrop': '背景除去後分割',
         'loading': '解析中...',
         
         'results.title': '分割結果',
@@ -221,6 +224,7 @@ const i18n = {
         'btn.reset': '🔄 초기화', 
         'btn.downloadAll': '📥 전체 다운로드',
         'btn.bgRemove': '배경 제거',
+        'btn.bgRemoveThenCrop': '배경 제거 후 분할',
         'loading': '분석 중...',
         
         'results.title': '분할 결과',
@@ -344,6 +348,14 @@ document.addEventListener('DOMContentLoaded', function() {
     bgRemoveBtn.addEventListener('click', function(e) {
         e.stopPropagation();
         backgroundRemove();
+        cropDropdown.parentElement.classList.remove('show');
+    });
+    
+    // 点击"先去底再拆分"按钮
+    const bgRemoveThenCropBtn = document.getElementById('bgRemoveThenCropBtn');
+    bgRemoveThenCropBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        bgRemoveThenCrop();
         cropDropdown.parentElement.classList.remove('show');
     });
     
@@ -504,7 +516,8 @@ function applyI18n() {
         'manualCropBtn': 'btn.manualCrop',
         'resetBtn': 'btn.reset',
         'downloadAllBtn': 'btn.downloadAll',
-        'bgRemoveBtn': 'btn.bgRemove'
+        'bgRemoveBtn': 'btn.bgRemove',
+        'bgRemoveThenCropBtn': 'btn.bgRemoveThenCrop'
     };
     for (let id in btns) {
         const btn = document.getElementById(id);
@@ -646,22 +659,10 @@ function smartCrop() {
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         
         // 核心检测算法
-        const regions = detectRange(imageData);
+        let regions = detectRange(imageData);
 
-        // --- 新增：排序逻辑 (阅读顺序：从上到下，从左到右) ---
-        regions.sort((a, b) => {
-            // 定义垂直容差 (像素)，用于处理稍微没对齐的网格
-            // 意味着：如果两个物体顶部高度差在 15px 以内，视为同一行
-            const tolerance = 15; 
-
-            if (Math.abs(a.y - b.y) <= tolerance) {
-                // 如果在同一行，按 X 轴排序（从左到右）
-                return a.x - b.x;
-            }
-            // 否则按 Y 轴排序（从上到下）
-            return a.y - b.y;
-        });
-        // -----------------------------------------------------
+        // 使用统一的排序函数，确保与先去底再拆分功能排序一致
+        regions = sortRegions(regions);
         
         croppedImages = [];
         regions.forEach((region, index) => {
@@ -732,6 +733,74 @@ async function backgroundRemove() {
         
     } catch (error) {
         console.error('Background removal error:', error);
+    } finally {
+        loading.style.display = 'none';
+        toggleButtons(false);
+    }
+}
+
+// 先去底再拆分功能
+async function bgRemoveThenCrop() {
+    const loading = document.getElementById('loading');
+    loading.style.display = 'inline-block';
+    // 禁用按钮防止重复点击
+    toggleButtons(true);
+    
+    try {
+        // 1. 获取当前预览图片
+        const canvas = cropper.getCroppedCanvas();
+        const imageData = canvas.getContext('2d').getImageData(0, 0, canvas.width, canvas.height);
+        
+        // 2. 对图片进行去底处理（不修改预览区域）
+        // 创建临时画布
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = canvas.width;
+        tempCanvas.height = canvas.height;
+        const tempCtx = tempCanvas.getContext('2d');
+        
+        // 复制原始图像数据到临时画布
+        tempCtx.putImageData(imageData, 0, 0);
+        
+        // 3. 对临时画布进行去底处理
+        const bgColor = detectBorderBackgroundColor(imageData);
+        removeBackgroundFloodFill(imageData, bgColor);
+        cleanEdges(imageData, bgColor, 60);
+        removeSpeckles(imageData, 30);
+        
+        // 将去底后的图像数据放回临时画布
+        tempCtx.putImageData(imageData, 0, 0);
+        
+        // 4. 对去底后的图片进行智能拆分
+        const processedImageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+        
+        // 使用智能拆分的核心检测算法，并应用统一的排序函数
+        let regions = detectRange(processedImageData);
+        regions = sortRegions(regions);
+        
+        // 5. 生成拆分结果
+        croppedImages = [];
+        regions.forEach((region, index) => {
+            const croppedCanvas = document.createElement('canvas');
+            croppedCanvas.width = region.width;
+            croppedCanvas.height = region.height;
+            const croppedCtx = croppedCanvas.getContext('2d');
+            
+            croppedCtx.drawImage(tempCanvas, region.x, region.y, region.width, region.height, 0, 0, region.width, region.height);
+            
+            const dataURL = croppedCanvas.toDataURL('image/png');
+            croppedImages.push({
+                id: index,
+                dataURL: dataURL,
+                width: region.width,
+                height: region.height
+            });
+        });
+        
+        // 6. 显示拆分结果
+        displayResults();
+        
+    } catch (error) {
+        console.error('Background removal then crop error:', error);
     } finally {
         loading.style.display = 'none';
         toggleButtons(false);
@@ -978,6 +1047,58 @@ function isSimilarColor(r1, g1, b1, a1, r2, g2, b2, a2, tolerance) {
     const colorDiff = Math.abs(r1 - r2) + Math.abs(g1 - g2) + Math.abs(b1 - b2);
     const alphaDiff = Math.abs(a1 - a2);
     return colorDiff < tolerance * 3 && alphaDiff < tolerance;
+}
+
+/**
+ * 统一区域排序函数：按照视觉顺序（从上到下，从左到右）排序区域
+ * @param {Array} regions - 待排序的区域数组
+ * @returns {Array} - 排序后的区域数组
+ */
+function sortRegions(regions) {
+    // 1. 为每个区域计算中心点坐标
+    const regionsWithCenters = regions.map(region => ({
+        ...region,
+        centerX: region.x + region.width / 2,
+        centerY: region.y + region.height / 2
+    }));
+    
+    // 2. 首先按照区域顶部坐标排序，初步确定行顺序
+    regionsWithCenters.sort((a, b) => a.y - b.y);
+    
+    // 3. 分组行
+    const rows = [];
+    let currentRow = [];
+    let currentRowY = null;
+    let currentRowHeight = null;
+    
+    regionsWithCenters.forEach(region => {
+        // 如果是第一行或者当前区域的顶部坐标与当前行的Y坐标之差小于行高的1/2，则认为是同一行
+        if (currentRow.length === 0 || 
+            Math.abs(region.y - currentRowY) < (currentRowHeight || region.height) / 2) {
+            currentRow.push(region);
+            currentRowY = region.y;
+            currentRowHeight = region.height;
+        } else {
+            // 新的一行
+            rows.push(currentRow);
+            currentRow = [region];
+            currentRowY = region.y;
+            currentRowHeight = region.height;
+        }
+    });
+    
+    // 添加最后一行
+    if (currentRow.length > 0) {
+        rows.push(currentRow);
+    }
+    
+    // 4. 对每行内的区域按照中心点X坐标排序（从左到右）
+    const sortedRegions = rows.flatMap(row => {
+        return row.sort((a, b) => a.centerX - b.centerX);
+    });
+    
+    // 5. 返回排序后的区域（移除中心点信息）
+    return sortedRegions.map(({ centerX, centerY, ...region }) => region);
 }
 
 /**
